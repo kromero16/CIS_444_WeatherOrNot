@@ -1,3 +1,4 @@
+// Listen for when the HTML document is fully loaded and parsed
 document.addEventListener("DOMContentLoaded", function() {
   
     const form = document.getElementById('city-form');
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   });
   
+  // Set up a listener for the XMLHttpRequest state change
   function fetchForecastForCity(city) {
     const data = null;
 
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=3`);
-    xhr.setRequestHeader('X-RapidAPI-Key', '5184b2ea79msh3b9ced277cf2e64p1a3aedjsn569d7532c4b8');
+    xhr.setRequestHeader('X-RapidAPI-Key', process.env.WEATHER_API_KEY);
     xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
     
     xhr.send(data);
