@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=3`);
-    xhr.setRequestHeader('X-RapidAPI-Key', process.env.WEATHER_API_KEY);
+    xhr.setRequestHeader('X-RapidAPI-Key', '5a1f892a6fmsh79b914fdd2d4469p1d85fejsnfd6c65fa4b63');
     xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
     
     xhr.send(data);
