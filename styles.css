@@ -13,6 +13,23 @@ body, html {
   background-attachment: fixed; /* Fix the background image during scroll */
 }
 
+h1 {
+  text-align: center;
+}
+
+#forecast-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.forecast{
+  flex: 1;
+  text-align: center;
+  margin: 1em;
+  padding: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .login-container {
   background-color: rgba(255, 255, 255, 0.8); /* Set a white background with some opacity for the login container */
   padding: 40px; /* Add padding inside the login container */
