@@ -68,6 +68,88 @@ function togglePasswordVisibility(passwordFieldId, toggleIcon) {
 // Listen for when the HTML document is fully loaded and parsed
 document.addEventListener("DOMContentLoaded", function() {
   
+  const form = document.getElementById('city-form');
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const city = document.getElementById('city').value;
+    
+    // Make the API request
+    fetchForecastForCity(city);
+  });
+
+});
+
+function fetchForecastForCity(city) {
+  const xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.onreadystatechange = function () {
+      if (this.readyState === XMLHttpRequest.DONE) {
+          if (this.status === 200) { // Check if the request was successful
+              const response = JSON.parse(this.responseText);
+              const forecastdays = response.forecast.forecastday;
+              const currentTemp_f = response.current.temp_f; // Get the current temperature
+
+              // Clear existing forecasts
+              const forecastContainer = document.getElementById('forecast-container');
+              forecastContainer.innerHTML = '';
+
+              // Process each forecast day
+              forecastdays.forEach(day => {
+                const maxtemp_f = day.day.maxtemp_f;
+                const mintemp_f = day.day.mintemp_f;
+                const icon = day.day.condition.icon;
+                const date = new Date(day.date); // Convert the date string into a Date object
+                const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
+
+                // Create and append HTML elements
+                const forecastDiv = document.createElement('div');
+                forecastDiv.className = 'forecast';
+
+                // Create a p element for the day of the week and add it to forecastDiv
+                const dayElement = document.createElement('p');
+                dayElement.className = 'day-of-week';
+                dayElement.textContent = dayOfWeek;
+                forecastDiv.appendChild(dayElement);
+
+                // Create a p element for the high and low temperatures and add it to forecastDiv
+                const highLowElement = document.createElement('p');
+                highLowElement.textContent = `High: ${maxtemp_f}°F, Low: ${mintemp_f}°F`;
+                forecastDiv.appendChild(highLowElement);
+
+                // Include the current temperature if it's the forecast for today
+                if (new Date().toDateString() === date.toDateString()) {
+                    const currentTempElement = document.createElement('p');
+                    currentTempElement.textContent = `Current: ${currentTemp_f}°F`;
+                    forecastDiv.appendChild(currentTempElement);
+                }
+
+                const iconElement = document.createElement('img');
+                iconElement.src = `https:${icon}`;
+
+                forecastDiv.appendChild(iconElement);
+                forecastContainer.appendChild(forecastDiv);
+            });
+          } else {
+              console.error("Error in API request:", this.statusText);
+          }
+      }
+  };
+
+  xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=3`);
+  xhr.setRequestHeader('X-RapidAPI-Key', 'YOUR_API_KEY_HERE');
+  xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
+  xhr.send();
+}
+
+
+
+/*
+// Listen for when the HTML document is fully loaded and parsed
+document.addEventListener("DOMContentLoaded", function() {
+  
     const form = document.getElementById('city-form');
     
     form.addEventListener('submit', function(e) {
@@ -134,5 +216,5 @@ document.addEventListener("DOMContentLoaded", function() {
     xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
     xhr.send();
 }
-
+*/
   
