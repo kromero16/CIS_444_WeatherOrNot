@@ -25,7 +25,6 @@ function togglePasswordVisibility(passwordFieldId, toggleIcon) {
   // This ensures the script runs after the DOM is fully loaded.
   document.addEventListener('DOMContentLoaded', (event) => {
 
-
     // Listener for the registration form submission
     var registerForm = document.getElementById('register');
     if (registerForm) {
@@ -81,52 +80,59 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   
   });
-  
-  // Set up a listener for the XMLHttpRequest state change
-  function fetchForecastForCity(city) {
-    const data = null;
 
+  //Fetches weather forecast for a given city and prints result to forecast.html
+  function fetchForecastForCity(city) {
     const xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
-    
-    xhr.addEventListener('readystatechange', function () {
-        if (this.readyState === this.DONE) {
-            const response = JSON.parse(this.responseText);
-            const forecastdays = response.forecast.forecastday;
-  
-            // Clear existing forecasts if any
-            const forecastContainer = document.getElementById('forecast-container');
-            forecastContainer.innerHTML = '';
-  
-            // Loop through each forecast day to capture the data
-            for (let i = 0; i < forecastdays.length; i++) {
-              const avgtemp_f = forecastdays[i].day.avgtemp_f;
-              const icon = forecastdays[i].day.condition.icon;
-  
-              // Create HTML elements dynamically
-              const forecastDiv = document.createElement('div');
-              forecastDiv.className = 'forecast';
-  
-              const tempElement = document.createElement('p');
-              tempElement.textContent = `Avg Temp: ${avgtemp_f}°F`;
-  
-              const iconElement = document.createElement('img');
-              iconElement.src = `https:${icon}`;
-  
-              // Append elements to the forecast div
-              forecastDiv.appendChild(tempElement);
-              forecastDiv.appendChild(iconElement);
-  
-              // Append forecast div to some parent container in your HTML
-              forecastContainer.appendChild(forecastDiv);
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            if (this.status === 200) { // Check if the request was successful
+                const response = JSON.parse(this.responseText);
+                const forecastdays = response.forecast.forecastday;
+
+                // Clear existing forecasts
+                const forecastContainer = document.getElementById('forecast-container');
+                forecastContainer.innerHTML = '';
+
+                // Process each forecast day
+                forecastdays.forEach(day => {
+                  const avgtemp_f = day.day.avgtemp_f;
+                  const icon = day.day.condition.icon;
+                  const date = new Date(day.date); // Convert the date string into a Date object
+                  const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
+              
+                  // Create and append HTML elements
+                  const forecastDiv = document.createElement('div');
+                  forecastDiv.className = 'forecast';
+              
+                  // Create a p element for the day of the week and add it to forecastDiv
+                  const dayElement = document.createElement('p');
+                  dayElement.className = 'day-of-week';
+                  dayElement.textContent = dayOfWeek;
+                  forecastDiv.appendChild(dayElement);
+              
+                  const tempElement = document.createElement('p');
+                  tempElement.textContent = `Avg Temp: ${avgtemp_f}°F`;
+              
+                  const iconElement = document.createElement('img');
+                  iconElement.src = `https:${icon}`;
+              
+                  forecastDiv.appendChild(tempElement);
+                  forecastDiv.appendChild(iconElement);
+                  forecastContainer.appendChild(forecastDiv);
+              });
+            } else {
+                console.error("Error in API request:", this.statusText);
             }
         }
-    });
-    
+    };
+
     xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=3`);
     xhr.setRequestHeader('X-RapidAPI-Key', '5a1f892a6fmsh79b914fdd2d4469p1d85fejsnfd6c65fa4b63');
     xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
-    
-    xhr.send(data);
-  }
+    xhr.send();
+}
+
   
