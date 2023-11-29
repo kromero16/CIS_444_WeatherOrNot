@@ -5,7 +5,7 @@ body, html {
   display: flex; /* Use flexbox layout to easily center children elements */
   justify-content: center; /* Center flex items on the horizontal axis */
   align-items: center; /* Center flex items on the vertical axis */
-
+  flex-direction: column;
   background-image: url("Sky.png"); /* Set a background image */
   background-size: cover; /* Ensure the background image covers the entire element */
   background-position: center center; /* Center the background image */
@@ -13,22 +13,63 @@ body, html {
   background-attachment: fixed; /* Fix the background image during scroll */
 }
 
+#city-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+}
+
 h1 {
   text-align: center;
+  margin-top: 2rem;
 }
 
-#forecast-container{
-  display: flex;
-  justify-content: space-around;
+.day-of-week {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.2em; /* Adjust the font size as needed */
 }
 
-.forecast{
-  flex: 1;
+.forecast {
+  flex: 1 1 auto; /* Update flex property to accommodate new content */
   text-align: center;
   margin: 1em;
   padding: 1em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 200px; /* Adjust if necessary */
+  display: flex;
+  flex-direction: column; /* Stack children elements vertically */
+  justify-content: space-between; /* Distribute space around items */
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: Add background color for readability */
+  border-radius: 10px; /* Optional: Round corners */
 }
+
+/* Add additional styles for input and button elements within the form for better aesthetics */
+#city-form input[type="text"] {
+  margin-right: 0.5rem;
+  /* other styles */
+}
+
+#city-form input[type="submit"] {
+  /* styles for the submit button */
+}
+
+.forecast img {
+  object-fit: contain; /* This ensures the aspect ratio is maintained */
+  max-width: 100%; /* This ensures the image does not stretch beyond the width of its container */
+  max-height: 80px; /* Adjust to the desired value */
+}
+
+#forecast-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* Allow items to wrap if needed */
+  width: 100%;
+  max-width: 1200px; /* Adjust maximum width as necessary */
+  margin-top: 20px; /* Add some space above the forecast container */
+}
+
 
 .login-container {
   background-color: rgba(255, 255, 255, 0.8); /* Set a white background with some opacity for the login container */
