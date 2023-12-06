@@ -51,10 +51,6 @@ h1 {
   /* other styles */
 }
 
-#city-form input[type="submit"] {
-  /* styles for the submit button */
-}
-
 .forecast img {
   object-fit: contain; /* This ensures the aspect ratio is maintained */
   max-width: 100%; /* This ensures the image does not stretch beyond the width of its container */
