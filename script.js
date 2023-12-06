@@ -50,7 +50,7 @@ function togglePasswordVisibility(passwordFieldId, toggleIcon) {
           console.log("New Password: " + newPassword);
     
           // Redirect to login on successful registration
-          window.location.href = 'login.html'; 
+          window.location.href = 'Login Page.html'; 
         }
       });
     }
@@ -64,6 +64,25 @@ function togglePasswordVisibility(passwordFieldId, toggleIcon) {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  var loginForm = document.getElementById('login-form-id'); // Replace with your form's ID
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var username = document.getElementById('username-id').value; // Replace with your username field's ID
+      var password = document.getElementById('password-id').value; // Replace with your password field's ID
+
+      // Add your login validation logic here
+
+      // Redirect to the Location Page on successful login
+      window.location.href = 'Location Page.html'; // Replace with your location page's filename
+    });
+  }
+});
+
 
 // Listen for when the HTML document is fully loaded and parsed
 document.addEventListener("DOMContentLoaded", function() {
