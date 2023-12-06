@@ -82,139 +82,75 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function fetchForecastForCity(city) {
-  const xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  const forecastContainer = document.getElementById('forecast-container');
+  forecastContainer.innerHTML = ''; // Clear existing forecasts
 
-  xhr.onreadystatechange = function () {
-      if (this.readyState === XMLHttpRequest.DONE) {
-          if (this.status === 200) { // Check if the request was successful
-              const response = JSON.parse(this.responseText);
-              const forecastdays = response.forecast.forecastday;
-              const currentTemp_f = response.current.temp_f; // Get the current temperature
+  // Generate dates for today and the next two days
+  const dates = [new Date(), new Date(), new Date()];
+  dates[1].setDate(dates[1].getDate() + 1); // Tomorrow
+  dates[2].setDate(dates[2].getDate() + 2); // Day after tomorrow
 
-              // Clear existing forecasts
-              const forecastContainer = document.getElementById('forecast-container');
-              forecastContainer.innerHTML = '';
+  // Assume the first promise (today's date) includes the current weather data
+  const promises = dates.map((date, index) => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
 
-              // Process each forecast day
-              forecastdays.forEach(day => {
-                const maxtemp_f = day.day.maxtemp_f;
-                const mintemp_f = day.day.mintemp_f;
-                const icon = day.day.condition.icon;
-                const date = new Date(day.date); // Convert the date string into a Date object
-                const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
+      xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          resolve(JSON.parse(this.responseText));
+        } else if (this.readyState === XMLHttpRequest.DONE) {
+          reject(new Error("Error in API request"));
+        }
+      };
 
-                // Create and append HTML elements
-                const forecastDiv = document.createElement('div');
-                forecastDiv.className = 'forecast';
-
-                // Create a p element for the day of the week and add it to forecastDiv
-                const dayElement = document.createElement('p');
-                dayElement.className = 'day-of-week';
-                dayElement.textContent = dayOfWeek;
-                forecastDiv.appendChild(dayElement);
-
-                // Create a p element for the high and low temperatures and add it to forecastDiv
-                const highLowElement = document.createElement('p');
-                highLowElement.textContent = `High: ${maxtemp_f}°F, Low: ${mintemp_f}°F`;
-                forecastDiv.appendChild(highLowElement);
-
-                // Include the current temperature if it's the forecast for today
-                if (new Date().toDateString() === date.toDateString()) {
-                    const currentTempElement = document.createElement('p');
-                    currentTempElement.textContent = `Current: ${currentTemp_f}°F`;
-                    forecastDiv.appendChild(currentTempElement);
-                }
-
-                const iconElement = document.createElement('img');
-                iconElement.src = `https:${icon}`;
-
-                forecastDiv.appendChild(iconElement);
-                forecastContainer.appendChild(forecastDiv);
-            });
-          } else {
-              console.error("Error in API request:", this.statusText);
-          }
-      }
-  };
-
-  xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=3`);
-  xhr.setRequestHeader('X-RapidAPI-Key', '5a1f892a6fmsh79b914fdd2d4469p1d85fejsnfd6c65fa4b63');
-  xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
-  xhr.send();
-}
-
-
-
-/*
-// Listen for when the HTML document is fully loaded and parsed
-document.addEventListener("DOMContentLoaded", function() {
-  
-    const form = document.getElementById('city-form');
-    
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const city = document.getElementById('city').value;
-      
-      // Make the API request
-      fetchForecastForCity(city);
+      const formattedDate = date.toISOString().split('T')[0];
+      xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=1&dt=${formattedDate}`);
+      xhr.setRequestHeader('X-RapidAPI-Key', '5a1f892a6fmsh79b914fdd2d4469p1d85fejsnfd6c65fa4b63');
+      xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
+      xhr.send();
     });
-  
   });
 
-  //Fetches weather forecast for a given city and prints result to forecast.html
-  function fetchForecastForCity(city) {
-    const xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
+  Promise.all(promises).then(responses => {
+    responses.forEach((response, index) => {
+      const forecastDay = response.forecast.forecastday[0];
+      const maxtemp_f = forecastDay.day.maxtemp_f;
+      const mintemp_f = forecastDay.day.mintemp_f;
+      const icon = forecastDay.day.condition.icon;
+      const date = dates[index];
+      const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
 
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status === 200) { // Check if the request was successful
-                const response = JSON.parse(this.responseText);
-                const forecastdays = response.forecast.forecastday;
+      // Create and append HTML elements for each forecast
+      const forecastDiv = document.createElement('div');
+      forecastDiv.className = 'forecast';
 
-                // Clear existing forecasts
-                const forecastContainer = document.getElementById('forecast-container');
-                forecastContainer.innerHTML = '';
+      const dayElement = document.createElement('p');
+      dayElement.className = 'day-of-week';
+      dayElement.textContent = dayOfWeek;
+      forecastDiv.appendChild(dayElement);
 
-                // Process each forecast day
-                forecastdays.forEach(day => {
-                  const avgtemp_f = day.day.avgtemp_f;
-                  const icon = day.day.condition.icon;
-                  const date = new Date(day.date); // Convert the date string into a Date object
-                  const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' }); // Get the day of the week
-              
-                  // Create and append HTML elements
-                  const forecastDiv = document.createElement('div');
-                  forecastDiv.className = 'forecast';
-              
-                  // Create a p element for the day of the week and add it to forecastDiv
-                  const dayElement = document.createElement('p');
-                  dayElement.className = 'day-of-week';
-                  dayElement.textContent = dayOfWeek;
-                  forecastDiv.appendChild(dayElement);
-              
-                  const tempElement = document.createElement('p');
-                  tempElement.textContent = `Avg Temp: ${avgtemp_f}°F`;
-              
-                  const iconElement = document.createElement('img');
-                  iconElement.src = `https:${icon}`;
-              
-                  forecastDiv.appendChild(tempElement);
-                  forecastDiv.appendChild(iconElement);
-                  forecastContainer.appendChild(forecastDiv);
-              });
-            } else {
-                console.error("Error in API request:", this.statusText);
-            }
-        }
-    };
+      const highLowElement = document.createElement('p');
+      highLowElement.textContent = `High: ${maxtemp_f}°F, Low: ${mintemp_f}°F`;
+      forecastDiv.appendChild(highLowElement);
 
-    xhr.open('GET', `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${encodeURIComponent(city)}&days=3`);
-    xhr.setRequestHeader('X-RapidAPI-Key', '5a1f892a6fmsh79b914fdd2d4469p1d85fejsnfd6c65fa4b63');
-    xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
-    xhr.send();
+      // If it's the first day (today), add the current weather data
+      if (index === 0 && response.current) {
+        const currentTemp_f = response.current.temp_f;
+        const currentCondition = response.current.condition.text;
+
+        const currentTempElement = document.createElement('p');
+        currentTempElement.textContent = `Current: ${currentTemp_f}°F - ${currentCondition}`;
+        forecastDiv.insertBefore(currentTempElement, highLowElement);
+      }
+
+      const iconElement = document.createElement('img');
+      iconElement.src = `https:${icon}`;
+      forecastDiv.appendChild(iconElement);
+
+      forecastContainer.appendChild(forecastDiv);
+    });
+  }).catch(error => {
+    console.error("Error in API requests:", error);
+  });
 }
-*/
-  
