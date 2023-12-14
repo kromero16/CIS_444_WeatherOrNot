@@ -217,3 +217,77 @@ button:hover {
   width: 100%;
   margin-top:600px;
 }
+
+.locate-me {
+  margin-top: 20px; /* Adjust spacing as necessary */
+  text-align: center; /* Center the button */
+}
+
+#locate-me {
+  padding: 10px 20px; /* Make the button large enough to be easily clickable */
+  font-size: 1em; /* Match the font size of your form */
+  
+}
+
+.weather-info {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Space between the form and the weather container */
+  width: calc(100% - 30px); /* Width with padding accounted */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: center; /* Center-align the text */
+}
+
+.weather-info h2 {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.weather-info p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.weather-info img {
+  height: 50px; /* Adjust the image size */
+  vertical-align: middle; /* Align the icon vertically with the text */
+}
+
+/* Button Styles */
+button {
+  /* Existing button styles... */
+  display: block; /* Make the button a block element */
+  width: auto; /* Auto width based on content */
+  margin: 10px auto; /* Center the button with automatic horizontal margins */
+}
+
+/* Locate Me Button */
+#locate-me {
+  padding: 10px 20px; /* Adjust padding */
+  font-size: 1em; /* Match the font size */
+  margin-top: 20px; /* Add space on the top */
+  margin-bottom: 0; /* Remove margin from the bottom */
+  width: auto; /* Auto width based on content */
+}
+
+/* Ensure button hover effect is clear */
+button:hover {
+  background-color: #444; /* Darken button background on hover */
+  color: #fff; /* Keep text color white on hover */
+}
+
+/* Register Button */
+.register-button {
+  margin: 0 auto; /* Center the button in the available space */
+  display: block; /* Make the button a block element */
+}
+
+/* Add a bottom margin to the register form for spacing */
+.login-form {
+  margin-bottom: 20px; /* Space at the bottom of the form */
+}
