@@ -186,6 +186,11 @@ function locateUser() {
   }
 }
 
+//add event listener for the locate me button on main.html (forecast page)
+document.getElementById('locate-me').addEventListener('click', function(){
+  locateUser();
+});
+
 function getWeather(latitude, longitude) {
   const xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
