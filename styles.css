@@ -150,7 +150,6 @@ button:hover {
   text-align: center; /* Center-align the text of the password error message */
   margin-top: 10px; /* Add space above the password error message */
 }
-
 .login-button,
 .register-button{
   display: inline-block;

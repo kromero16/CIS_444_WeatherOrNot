@@ -1,34 +1,30 @@
-<!DOCTYPE html> 
-<html lang="en"> <!-- Root element of the HTML document, setting the language to English -->
-<head> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-<title>Weather Or Not - Login</title> <!-- The title of the document shown in the browser's title bar or tab -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Or Not - Login</title>
+    <link rel="icon" type="image/png" href="Weather Or Not LOGO (2).png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="login-container">
+  <div class="login-form">
+    <h1>Weather Or Not</h1>
+    <form id="login" method="get" action="VUser.php">
+      <div class="input-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit" id="ValidateUser">Login</button>
+      <button type="button" id="createUser" onclick="location.href='register.html';">Create New User</button>
 
-<link rel="icon" type="image/png" href="Weather Or Not LOGO (2).png">
-
-<link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file for styling the document -->
-</head> 
-<body> <!-- Contains the content of the HTML document -->
-<div class="login-container"> <!-- Section or container for the login form with a class for styling -->
-  <div class="login-form"> <!-- Container for the form, styled as a login form -->
-    <h1>Weather Or Not</h1> <!-- Main heading/title of the login form -->
-    <form id="login"> <!-- The form element with an ID for identification and styling -->
-      <div class="input-group"> <!-- Grouping for input field, allows for collective styling and alignment -->
-        <label for="username">Username:</label> <!-- Label for the username input -->
-        <input type="text" id="username" name="username" required> <!-- Text input for username, marked as required -->
-      </div>
-      <div class="input-group"> <!-- Another input group for password -->
-        <label for="password">Password:</label> <!-- Label for the password input -->
-        <input type="password" id="password" name="password" required> <!-- Password input, hides text entry, also required -->
-      </div>
-      <button type="submit">Login</button> <!-- Button to submit the form -->
-      <div class="input-group"> <!-- A separate input group for a different action -->
-        <button type="button" id="createUser">Create New User</button> <!-- Button for creating a new user, triggers a different action -->
-      </div>
     </form>
   </div>
 </div>
-<script src="script.js"></script> <!-- Link to an external JavaScript file for interactivity -->
+<script src="script.js"></script>
 </body>
-</html> <!-- Closes the body and the html document -->
+</html>
