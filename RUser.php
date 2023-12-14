@@ -44,7 +44,6 @@ $query->execute();
 $row = $query->fetch();
 $UserID = $row['UserID'];
 
-
 // Close the connection and free resources
 $pdo = null;
 

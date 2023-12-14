@@ -51,10 +51,6 @@ h1 {
   /* other styles */
 }
 
-#city-form input[type="submit"] {
-  /* styles for the submit button */
-}
-
 .forecast img {
   object-fit: contain; /* This ensures the aspect ratio is maintained */
   max-width: 100%; /* This ensures the image does not stretch beyond the width of its container */
@@ -154,41 +150,156 @@ button:hover {
   text-align: center; /* Center-align the text of the password error message */
   margin-top: 10px; /* Add space above the password error message */
 }
-.login-button
-{
+.login-button,
+.register-button{
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding:2px 5px;
+  background-color: black;
+  color:white;
+  text-decoration:none;
+  border-radius: 2px;
+  border: none;
+  transition: background-color 0.3s ease;
+  position: absolute;
+
+}
+
+
+.register-button{
+  margin-left: 55px;
+  position: relative;
+}
+
+
+.register-button:hover,
+.login-button:hover{
+  background-color: red;
+}
+
+.buttons{
+  position: absolute;
+  top:20px;
+  right:20px;
+}
+.main{
+  padding: 10px 50px;
+  font-size: 1.5em;
+  background-color: black;
+  color: white !important;
+  border-radius: 5px; /* Adding rounded corners */
+  border: none;
+  top:50%;
+  left:50%;
+  text-decoration: none; /* Remove underline for the link */
   text-align: center;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  line-height: 1; /* Ensures consistent button height */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  /* Add transition for smooth effect */
+  /*  transition: background-color 0.3s, color 0.3s;*/
 }
-.login-button:hover {
-  background-color: #0056b3;
+.main-button{
+  position:absolute;
 }
-
-
-.Location-button
-{
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  top: 0; /* 0 distance from the top */
-  right: 0; /* 0 distance from the right */
-  margin: 10px; /* Add some margin if you want to keep it away from the very corner */
+.title{
+  text-align: center;
+  margin-top: 20px;;
 }
-
-.Location-button:hover {
-  background-color: #0056b3;
+.main-heading {
+  text-align:center;
+  font-size: 2em;
+  margin-bottom: 200px;
 }
 
 .desc {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin-top:600px;
+}
 
-  color: #ffffff; /* A color that contrasts well with the light background */
+.locate-me {
+  margin-top: 20px; /* Adjust spacing as necessary */
+  text-align: center; /* Center the button */
+}
+
+#locate-me {
+  padding: 10px 20px; /* Make the button large enough to be easily clickable */
+  font-size: 1em; /* Match the font size of your form */
+  
+}
+
+.weather-info {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Space between the form and the weather container */
+  width: calc(100% - 30px); /* Width with padding accounted */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: center; /* Center-align the text */
+}
+
+.weather-info h2 {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.weather-info p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.weather-info img {
+  height: 50px; /* Adjust the image size */
+  vertical-align: middle; /* Align the icon vertically with the text */
+}
+
+/* Button Styles */
+button {
+  /* Existing button styles... */
+  display: block; /* Make the button a block element */
+  width: auto; /* Auto width based on content */
+  margin: 10px auto; /* Center the button with automatic horizontal margins */
+ 
+    padding: 10px 15px; /* Adjust padding as necessary */
+    font-size: 1em; /* Set the font size */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Round the corners */
+    background-color: #fff; /* Set the background color */
+    color: #333; /* Set the text color */
+    outline: none; /* Remove the outline */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    width: 100%; /* Make the button expand to the full width of its parent */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+    margin-bottom: 10px; /* Add space below the button */
+    transition: background-color 0.3s, color 0.3s; /* Add a transition effect for hover states */
+  }
+
+/* Locate Me Button */
+#locate-me {
+  padding: 10px 20px; /* Adjust padding */
+  font-size: 1em; /* Match the font size */
+  margin-top: 20px; /* Add space on the top */
+  margin-bottom: 0; /* Remove margin from the bottom */
+  width: auto; /* Auto width based on content */
+}
+
+/* Ensure button hover effect is clear */
+button:hover {
+  background-color: #444; /* Darken button background on hover */
+  color: #fff; /* Keep text color white on hover */
+}
+
+/* Register Button */
+.register-button {
+  margin: 0 auto; /* Center the button in the available space */
+  display: block; /* Make the button a block element */
+}
+
+/* Add a bottom margin to the register form for spacing */
+.login-form {
+  margin-bottom: 20px; /* Space at the bottom of the form */
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Weather Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+    <h1>Weather Dashboard</h1>
+    <form id="city-form">
+        <label for="city">Enter a city:</label>
+        <input type="text" id="city" name="city">
+        <input type="submit" value="Get Weather">
+    </form>
+
+    <div id="weather-container" class="weather-info">
+
+    </div>
+     <!-- Adding forecast container div -->
+     <button id="locate-me" class="button">Locate Me</button>
+        <!-- Forecast data will be appended here -->
+    </div>
+
+    <!-- Adding forecast container div -->
+    <div id="forecast-container">
+        <!-- Forecast data will be appended here -->
+    </div>
+
+    <!-- Moved the script to the bottom of the body -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>

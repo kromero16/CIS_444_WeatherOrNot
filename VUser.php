@@ -9,6 +9,7 @@
 if (empty($_GET['username']) || empty($_GET['password'])) {
     exit("<p> You must enter values in all fields! Click your browser's Back button to return to the previous page.</p>");
 }
+  
 $Username = $_GET['username'];
 $Password = $_GET['password'];
 
@@ -43,6 +44,7 @@ $pdo = null;
 ?>
 
 <h2> Login Successful</h2>
+
 <h3>You will be automatically redirected to Main Page or Update your credentials you will have 8 seconds</h3>
 <button type="button"  onclick="location.href='UpdateUser.html';">Update User Info</button>
 
@@ -52,6 +54,7 @@ $pdo = null;
     setTimeout(function() {
         window.location.href = 'forecast.html?UserID=<?=$UserID?>';
     }, 8000); // 8000 milliseconds = 8 seconds
+
 </script>
 
 </body>
