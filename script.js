@@ -173,3 +173,49 @@ function fetchForecastForCity(city) {
     console.error("Error in API requests:", error);
   });
 }
+
+function locateUser() {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      getWeather(position.coords.latitude, position.coords.longitude);
+    }, function(error) {
+      console.log("Error occurred: ", error);
+    });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+function getWeather(latitude, longitude) {
+  const xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener('readystatechange', function () {
+    if (this.readyState === this.DONE) {
+      // Parse the responseText to a JSON object
+      const response = JSON.parse(this.responseText);
+      // Display the weather information on the page
+      displayWeather(response);
+    }
+  });
+
+  const endpoint = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude},${longitude}`;
+  xhr.open('GET', endpoint);
+  xhr.setRequestHeader('X-RapidAPI-Key', '5a1f892a6fmsh79b914fdd2d4469p1d85fejsnfd6c65fa4b63');
+  xhr.setRequestHeader('X-RapidAPI-Host', 'weatherapi-com.p.rapidapi.com');
+  xhr.send();
+}
+
+function displayWeather(weatherData) {
+  // Here you would take the weatherData object and display the desired properties on the page
+  // For example:
+  const weatherContainer = document.getElementById('weather-container'); // Make sure to add this container to your HTML
+  weatherContainer.innerHTML = `
+    <p>City: ${weatherData.location.name}</p>
+    <p>Temperature: ${weatherData.current.temp_c}°C / ${weatherData.current.temp_f}°F</p>
+    <p>Condition: ${weatherData.current.condition.text}</p>
+    <img src="https:${weatherData.current.condition.icon}" alt="Weather Icon">
+  `;
+}
+
+
