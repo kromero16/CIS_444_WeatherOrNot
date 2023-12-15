@@ -1,6 +1,4 @@
 <?php
-
-
     $connString = "mysql:host=localhost; dbname=WeatherOrNot_DB";
     $user="root";
     $pass="root";
