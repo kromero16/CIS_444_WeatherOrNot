@@ -2,6 +2,8 @@
 
 SQL Database Script:
 
+dbname=WeatherOrNot_DB
+
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
