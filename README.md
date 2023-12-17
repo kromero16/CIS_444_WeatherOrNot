@@ -20,6 +20,7 @@ Prerequisites
 Installation
 
  git clone https://github.com/yourusername/weather-forecast-app.git
+ 
  cd weather-forecast-app
 
 Database Setup
