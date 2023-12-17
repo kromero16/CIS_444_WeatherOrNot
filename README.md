@@ -28,6 +28,7 @@ Database Setup
 To set up the database for this application, follow these steps:
 
   Log in to your MySQL server.
+  
   Create a new database named WeatherOrNot_DB:
 
     CREATE DATABASE WeatherOrNot_DB;
@@ -58,9 +59,8 @@ Configure Your Web Server:
 
 Install Dependencies:
 
-bash
-
     composer install
+
 
 Usage
 
@@ -91,5 +91,5 @@ License
 This project is licensed under the MIT License.
 Contact
 
-    Your Name - your.email@example.com
-    Project Link: https://github.com/yourusername/weather-forecast-app
+    Kevin Romero-Zaldana - kromeroit@gmail.com
+    Project Link: https://github.com/kromero16/CIS_444_WeatherOrNot
