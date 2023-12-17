@@ -21,7 +21,7 @@ Prerequisites
 Installation
 
     git clone https://github.com/kromero16/CIS_444_WeatherOrNot.git
-    cd weather-forecast-app
+    cd CIS_444_WeatherOrNot
 
 
 Database Setup
@@ -104,6 +104,7 @@ This application follows the MVC pattern:
     Model: Handles data logic and database interactions.
     View: Presents data to the user in a user-friendly format.
     Controller: Acts as an intermediary between the Model and View, handling user inputs and application logic.
+    Handlers: Facilitate request processing, routing to appropriate controllers, and preliminary data validation, acting as the entry point for client-server interaction.
 
 Contributing
 
