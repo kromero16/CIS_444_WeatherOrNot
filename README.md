@@ -2,6 +2,7 @@ Weather Forecast Web Application
 Overview
 
 This project is a web-based weather forecasting application with user authentication, enabling users to log in, update their account details, and view weather forecasts for different cities. The application is built following the Model-View-Controller (MVC) architecture, ensuring a clean separation of concerns between data handling, business logic, and user interface.
+
 Features
 
     User registration and authentication.
@@ -19,7 +20,7 @@ Prerequisites
 
 Installation
 
-    git clone https://github.com/yourusername/weather-forecast-app.git
+    git clone https://github.com/kromero16/CIS_444_WeatherOrNot.git
     cd weather-forecast-app
 
 
