@@ -1,5 +1,5 @@
 <?php
-require_once("Models/UserModel.php");
+require_once("../Models/UserModel.php");
 
 class RegisterController {
     private $userModel;
@@ -12,11 +12,11 @@ class RegisterController {
         // Error handling for empty fields or password mismatch
         if (empty($_POST['password']) || empty($_POST['confirm-password']) || empty($_POST['new-username'])) {
             $error = 'empty-fields';
-            header("Location: register.html?error=$error");
+            header("Location: ../Views/register.html?error=$error");
             exit();
         } else if ($_POST["password"] != $_POST["confirm-password"]) {
             $error = 'password-mismatch';
-            header("Location: register.html?error=$error");
+            header("Location: ../Views/register.html?error=$error");
             exit();
         }
 
@@ -26,7 +26,7 @@ class RegisterController {
         // Check if username already exists
         if ($this->userModel->doesUsernameExist($username)) {
             $error = 'username-exists';
-            header("Location: register.html?error=$error");
+            header("Location: ../Views/register.html?error=$error");
             exit();
         }
 
@@ -36,12 +36,12 @@ class RegisterController {
         // Create the user
         if ($this->userModel->createUser($username, $hashedPassword)) {
             // Redirect to login page on successful registration
-            header("Location: Login Page.html");
+            header("Location: ../Login Page.html");
             exit();
         } else {
             // Handle registration failure
             $error = 'registration-failed';
-            header("Location: register.html?error=$error");
+            header("Location: ../Views/register.html?error=$error");
             exit();
         }
     }

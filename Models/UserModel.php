@@ -1,5 +1,5 @@
 <?php
-require_once("Configs/DB_Config.php");
+require_once("../Configs/DB_Config.php");
 
 class UserModel {
     private $pdo;
