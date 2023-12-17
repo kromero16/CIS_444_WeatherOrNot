@@ -3,6 +3,8 @@ require_once("DB_Config.php");
 require_once("../Controllers/LoginController.php");
 require_once("../Models/UserModel.php");
 
+session_start();
+
 $userModel = new UserModel($pdo);
 $loginController = new LoginController($userModel);
 

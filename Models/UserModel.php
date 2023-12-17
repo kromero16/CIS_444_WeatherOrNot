@@ -40,6 +40,7 @@ class UserModel {
         return false; // If the user doesn't exist or multiple users returned
     }
 
+    //Fetches a user ID tied to a username or null if none found
     public function getUserId($username) {
         $sql = "SELECT UserID FROM Users WHERE username = :username"; // Assuming 'id' is the column name for user ID
         $stmt = $this->pdo->prepare($sql);
@@ -54,11 +55,20 @@ class UserModel {
         return null; // If the user doesn't exist or an error occurred
     }
 
+    //Updates the user password
     public function updateUserPassword($userId, $newPassword) {
         $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-        $sql = "UPDATE Users SET password = :newPassword WHERE id = :userId";
+        $sql = "UPDATE Users SET password = :newPassword WHERE UserID = :userId";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':newPassword', $newPasswordHash);
+        $stmt->bindParam(':userId', $userId);
+        return $stmt->execute();
+    }
+
+    public function updateUsername($userId, $newUsername) {
+        $sql = "UPDATE Users SET username = :newUsername WHERE UserID = :userId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':newUsername', $newUsername);
         $stmt->bindParam(':userId', $userId);
         return $stmt->execute();
     }

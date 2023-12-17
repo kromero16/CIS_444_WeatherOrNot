@@ -12,6 +12,7 @@ class LoginController {
         if ($this->userModel->validateCredentials($username, $password)) {
             // Login successful, redirect to forecast page with user ID
             $userId = $this->userModel->getUserId($username);
+            $_SESSION['userID'] = $userId;
             header("Location: ../Views/forecast.html?UserID={$userId}");
             exit();
         } else {

@@ -15,5 +15,18 @@ class UserController {
 
         return $this->userModel->updateUserPassword($userId, $newPassword);
     }
+
+    public function updateUsername($userId, $newUsername) {
+        if (!$newUsername) {
+            throw new Exception("Username cannot be empty.");
+        }
+
+        // Check if the new username already exists
+        if ($this->userModel->doesUsernameExist($newUsername)) {
+            throw new Exception("Username already exists.");
+        }
+
+        return $this->userModel->updateUsername($userId, $newUsername);
+    }
 }
 ?>
