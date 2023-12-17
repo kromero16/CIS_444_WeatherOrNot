@@ -36,7 +36,7 @@ class RegisterController {
         // Create the user
         if ($this->userModel->createUser($username, $hashedPassword)) {
             // Redirect to login page on successful registration
-            header("Location: ../Login Page.html");
+            header("Location: ../Views/login.html");
             exit();
         } else {
             // Handle registration failure
@@ -46,9 +46,5 @@ class RegisterController {
         }
     }
 }
-/*
-// Usage
-$userModel = new UserModel($pdo); // $pdo from DB_Config.php
-$registerController = new RegisterController($userModel);
-$registerController->register();*/
+
 ?>

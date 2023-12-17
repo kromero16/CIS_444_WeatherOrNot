@@ -1,6 +1,8 @@
 <?php
 require_once("../Configs/DB_Config.php");
 
+//These DB calls need exception handling to avoid leaking DB details
+
 class UserModel {
     private $pdo;
 
@@ -24,5 +26,33 @@ class UserModel {
         return $stmt->execute();
     }
 
+    public function validateCredentials($username, $password) {
+        $sql = "SELECT * FROM Users WHERE username = :username";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return password_verify($password, $user['password']); // Verify the password against the hash
+        }
+        
+        return false; // If the user doesn't exist or multiple users returned
+    }
+
+    public function getUserId($username) {
+        $sql = "SELECT UserID FROM Users WHERE username = :username"; // Assuming 'id' is the column name for user ID
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user['UserID']; // Return the user ID
+        }
+        
+        return null; // If the user doesn't exist or an error occurred
+    }
 }
+
 ?>
