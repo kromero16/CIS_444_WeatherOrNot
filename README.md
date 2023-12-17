@@ -60,6 +60,34 @@ Configure Your Web Server:
 Install Dependencies:
 
     composer install
+    
+Adding Your RapidAPI Key
+
+This application uses external APIs via RapidAPI to fetch weather data. To run the application successfully, you'll need to add your RapidAPI key to the script.js file.
+
+Steps to Add Your RapidAPI Key:
+
+Obtain a RapidAPI Key:
+        If you don't already have a RapidAPI key, you can obtain one by signing up at RapidAPI.
+        Once you have an account, generate a new API key.
+
+Add the API Key to the Application:
+        Open the script.js file located in the Scripts directory.
+        Locate the API endpoint calls.
+        Replace the placeholder in the API call headers with your actual RapidAPI key. For example:
+
+    xhr.setRequestHeader('X-RapidAPI-Key', 'YOUR_RAPIDAPI_KEY_HERE');
+
+Security Note:
+
+Do Not Commit Your API Key: 
+
+    Avoid committing your API key to public repositories for security reasons.
+Future Updates:
+
+        We plan to transition to Node.js in the future to enhance security by keeping the API key server-side and using environment variables to manage sensitive information.
+        
+        This change will prevent the exposure of the API key in the client-side code.
 
 
 Usage
