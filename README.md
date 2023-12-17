@@ -19,31 +19,23 @@ Prerequisites
 
 Installation
 
-    Clone the Repository:
-
-    bash
-
-git clone https://github.com/yourusername/weather-forecast-app.git
-cd weather-forecast-app
+ git clone https://github.com/yourusername/weather-forecast-app.git
+ cd weather-forecast-app
 
 Database Setup
 
 To set up the database for this application, follow these steps:
 
-    Create the Database:
-        Log in to your MySQL server.
-        Create a new database named WeatherOrNot_DB:
-
-        sql
+  Log in to your MySQL server.
+  Create a new database named WeatherOrNot_DB:
 
     CREATE DATABASE WeatherOrNot_DB;
     USE WeatherOrNot_DB;
 
+
 Create the Users Table:
 
-    Execute the following SQL script to create a Users table:
-
-    sql
+Execute the following SQL script to create a Users table:
 
     CREATE TABLE Users (
         UserID INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,7 +43,8 @@ Create the Users Table:
         password VARCHAR(255) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 
-    This table will store user account information, including usernames and passwords.
+
+This table will store user account information, including usernames and passwords.
 
 Update Application Configuration:
 
