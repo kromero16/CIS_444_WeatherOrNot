@@ -53,6 +53,16 @@ class UserModel {
         
         return null; // If the user doesn't exist or an error occurred
     }
+
+    public function updateUserPassword($userId, $newPassword) {
+        $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+        $sql = "UPDATE Users SET password = :newPassword WHERE id = :userId";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':newPassword', $newPasswordHash);
+        $stmt->bindParam(':userId', $userId);
+        return $stmt->execute();
+    }
+
 }
 
 ?>

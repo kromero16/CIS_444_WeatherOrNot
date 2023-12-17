@@ -12,7 +12,7 @@ class LoginController {
         if ($this->userModel->validateCredentials($username, $password)) {
             // Login successful, redirect to forecast page with user ID
             $userId = $this->userModel->getUserId($username);
-            header("Location: ../forecast.html?UserID={$userId}");
+            header("Location: ../Views/forecast.html?UserID={$userId}");
             exit();
         } else {
             // Invalid credentials, redirect to login with error
@@ -21,3 +21,4 @@ class LoginController {
         }
     }
 }
+?>
